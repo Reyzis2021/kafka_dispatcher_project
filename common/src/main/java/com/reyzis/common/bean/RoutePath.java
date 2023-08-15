@@ -11,21 +11,25 @@ import lombok.Setter;
 @NoArgsConstructor
 public class RoutePath {
 
-    private RoutePath from;
-    private RoutePath to;
+    private RoutePoint from;
+    private RoutePoint to;
     private double progress;
 
-    private static final Integer COMPLETED = 100;
+    private static final Integer DONE = 100;
 
     public void addProgress(double speed) {
         progress += speed;
-        if (progress > COMPLETED) {
-            progress = COMPLETED;
+        if (progress > DONE) {
+            progress = DONE;
         }
     }
 
     public boolean done() {
-        return progress == COMPLETED;
+        return progress == DONE;
+    }
+
+    public boolean inProgress() {
+        return progress < DONE;
     }
 
 }

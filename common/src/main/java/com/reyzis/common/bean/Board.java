@@ -1,6 +1,6 @@
 package com.reyzis.common.bean;
 
-import lombok.EqufalsAndHashCode;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,11 +19,27 @@ public class Board {
     private double y;
     private double angle;
 
+    private static final int FULL_TURN = 360;
+
     private boolean noBusy() {
         return !busy;
     }
 
     private void calculatePosition(RoutePath routeDirection) {
         double t = routeDirection.getProgress() / 100;
+        double toX = (1-t) * routeDirection.getFrom().getX() + t * routeDirection.getTo().getX();
+        double toY = (1-t) * routeDirection.getFrom().getY() + t * routeDirection.getTo().getY();
+
+        double deltaX = this.x - toX;
+        double deltaY = this.y - toY;
+
+        this.angle = Math.toDegrees(Math.atan2(deltaY, deltaX));
+
+        if (this.angle < 0) {
+            this.angle = FULL_TURN + this.angle;
+        }
+
+        this.x = toX;
+        this.y = toY;
     }
 }
