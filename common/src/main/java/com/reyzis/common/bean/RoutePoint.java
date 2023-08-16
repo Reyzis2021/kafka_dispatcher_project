@@ -15,4 +15,9 @@ public class RoutePoint {
     private double x;
     private double y;
 
+    public RoutePoint(Airport airport) {
+        this.name = airport.getName();
+        this.x = airport.getX();
+        this.y = airport.getY();
+    }
 }

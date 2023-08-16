@@ -35,7 +35,7 @@ public class Airport {
                         });
     }
 
-    private void removeBoard(String boardName) {
+    public void removeBoard(String boardName) {
         Optional.ofNullable(boardName)
                 .ifPresentOrElse(
                         board -> boards.remove(boardName),
